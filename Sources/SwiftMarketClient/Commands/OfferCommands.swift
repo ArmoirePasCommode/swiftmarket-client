@@ -85,9 +85,11 @@ struct AcceptCommand: AsyncParsableCommand {
             let offer = try await api.acceptOffer(id: uuid)
             let amountStr = String(format: "%.2f€", offer.amount)
             let buyerStr = offer.buyer?.username ?? "unknown"
+            let listingTitle = offer.listing?.title ?? "unknown"
             print("Offer accepted.")
-            print("Buyer:  \(buyerStr) (\(amountStr))")
-            print("Other offers on this listing have been automatically rejected.")
+            print("Listing: \(listingTitle)")
+            print("Buyer:   \(buyerStr)")
+            print("Amount:  \(amountStr)")
         } catch {
             handleAPIError(error)
             throw ExitCode.failure
